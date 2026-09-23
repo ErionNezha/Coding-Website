@@ -1,453 +1,115 @@
-<!DOCTYPE html>
 <!-- Created by Erion Nezha — © 2026 All rights reserved -->
+<!DOCTYPE html>
 <html lang="sq">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Studio — Faqe moderne</title>
-    <meta name="description" content="Web Studio — dizajn modern dhe zhvillim faqesh web. Shërbime profesionale, çmime të qarta dhe kontakt direkt.">
-
-    <!-- font awesome cdn link  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-    <!-- custom css file link  -->
-    <link rel="stylesheet" href="css/style.css">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coding Website — Erion Nezha</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0a0e14;color:#e6e6e6;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;display:flex;flex-direction:column}
+header.top{background:linear-gradient(135deg,#0d1b2a,#1b263b);padding:28px 20px;text-align:center;border-bottom:2px solid #00d4ff33}
+header.top h1{font-size:1.7rem;color:#fff;margin-bottom:8px}
+header.top p{color:#9fb3c8;max-width:760px;margin:0 auto 12px;line-height:1.55;font-size:.95rem}
+.badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.badge{background:#00d4ff22;border:1px solid #00d4ff66;color:#7fdbff;padding:4px 12px;border-radius:20px;font-size:.78rem}
+.tabs{display:flex;gap:10px;justify-content:center;padding:16px;background:#0d1420;border-bottom:1px solid #ffffff14}
+.tabs button{background:#1b263b;color:#cfd8e3;border:1px solid #ffffff22;padding:10px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;transition:.2s}
+.tabs button.active,.tabs button:hover{background:#00d4ff;color:#04121a;border-color:#00d4ff;font-weight:600}
+main{flex:1;padding:20px;max-width:1200px;width:100%;margin:0 auto}
+.panel{display:none}
+.panel.active{display:block}
+iframe.demo{width:100%;height:78vh;border:1px solid #ffffff22;border-radius:10px;background:#fff}
+.codewrap{display:flex;gap:0;border:1px solid #ffffff22;border-radius:10px;overflow:hidden;height:78vh;background:#0d1117}
+.tree{width:250px;min-width:200px;background:#0d1420;border-right:1px solid #ffffff14;overflow-y:auto;padding:12px;font-size:.82rem}
+.tree .tfile{padding:5px 8px;border-radius:5px;cursor:pointer;color:#9fb3c8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tree .tfile:hover{background:#ffffff10;color:#fff}
+.tree .tfile.active{background:#00d4ff26;color:#7fdbff}
+.tree .tdir{color:#5c6b7f;font-weight:600;margin-top:8px;font-size:.75rem;text-transform:uppercase;letter-spacing:.5px}
+.codeview{flex:1;overflow:auto;padding:0;position:relative}
+.codeview pre{padding:16px;font-family:'Consolas','Fira Code',monospace;font-size:.82rem;line-height:1.6;color:#d6deeb;white-space:pre}
+.codeview .lineno{color:#4a5568;user-select:none;margin-right:12px;display:inline-block;width:32px;text-align:right}
+.codeview img.preview{max-width:100%;padding:20px}
+.cbar{display:flex;gap:8px;align-items:center;padding:10px 14px;background:#0d1420;border-bottom:1px solid #ffffff14;font-size:.82rem;color:#9fb3c8;overflow-x:auto}
+.ctab{padding:6px 14px;border-radius:6px;cursor:pointer;white-space:nowrap;border:1px solid transparent}
+.ctab:hover{background:#ffffff10}
+.ctab.active{background:#00d4ff26;color:#7fdbff;border-color:#00d4ff55}
+footer{text-align:center;padding:18px;color:#5c6b7f;font-size:.85rem;border-top:1px solid #ffffff10;margin-top:10px}
+footer strong{color:#9fb3c8}
+.term{background:#05070a;border:1px solid #00ff8833;border-radius:10px;overflow:hidden;height:78vh;display:flex;flex-direction:column}
+.term-head{background:#0d1420;padding:10px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #ffffff14}
+.dot{width:12px;height:12px;border-radius:50%}
+.term-title{color:#9fb3c8;font-size:.82rem;margin-left:6px;flex:1}
+.replay{background:#00ff8822;border:1px solid #00ff8866;color:#7dffb0;padding:5px 14px;border-radius:6px;cursor:pointer;font-size:.8rem}
+.replay:hover{background:#00ff8844}
+#term-body{flex:1;overflow-y:auto;padding:16px;font-family:'Consolas',monospace;font-size:.88rem;line-height:1.7;color:#33ff88;white-space:pre-wrap;word-break:break-word}
+#term-body .inp{color:#ffd75c}
+#term-body .dim{color:#4a6b57}
+.cursor{display:inline-block;width:9px;height:17px;background:#33ff88;vertical-align:-3px;animation:blink 1s infinite}
+@keyframes blink{50%{opacity:0}}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.split .term,.split .codewrap{height:78vh}
+@media(max-width:860px){.split{grid-template-columns:1fr}.codewrap{flex-direction:column}.tree{width:100%;max-height:150px;border-right:none;border-bottom:1px solid #ffffff14}}
+.kw{color:#ff7edb}.st{color:#ffd75c}.cm{color:#5c6b7f;font-style:italic}.fn{color:#7fdbff}.nm{color:#f78c6c}
+.note{background:#00d4ff12;border:1px solid #00d4ff44;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:.86rem;color:#9fb3c8;line-height:1.6}
+</style>
 </head>
 <body>
-
-<!-- header section starts      -->
-
-<header class="header">
-
-    <a href="#" class="logo"> <i class="fas fa-splotch"></i> web studio </a>
-
-    <nav class="navbar">
-        <a href="#home">ballina</a>
-        <a href="#services">shërbimet</a>
-        <a href="#about">rreth nesh</a>
-        <a href="#features">veçoritë</a>
-        <a href="#pricing">çmimet</a>
-        <a href="#faq">pyetjet</a>
-    </nav>
-
-    <div id="menu-btn" class="fas fa-bars"></div>
-
-    <a href="#faq" class="btn">na kontakto</a>
-
+<header class="top">
+<h1>🚀 Coding Website</h1>
+<p>Web Studio — Faqe moderne</p>
+<div class="badges"><span class="badge">HTML</span><span class="badge">CSS</span><span class="badge">JavaScript</span></div>
 </header>
-
-<!-- header section ends     -->
-
-<!-- home section starts  -->
-
-<section class="home" id="home">
-
-    <div class="image">
-        <img src="images/home-img.svg" alt="">
-    </div>
-
-    <div class="content">
-        <h3> <span class="line-down">dizajn kreativ</span> & zhvillim faqesh web </h3>
-        <p>Ne krijojmë faqe moderne, të shpejta dhe responsive për biznese dhe individë. Nga ideja te publikimi — gjithçka në një vend.</p>
-        <a href="#services" class="btn">fillo tani</a>
-    </div>
-
-</section>
-
-<!-- home section ends -->
-
-<!-- services section starts  -->
-
-<section class="services" id="services">
-
-    <div class="heading">
-        <span>shërbimet tona</span>
-        <h1>çfarë ofrojmë?</h1>
-    </div>
-
-    <div class="box-container">
-
-        <div class="box">
-            <img src="images/icon-1.svg" alt="">
-            <h3>dizajn web</h3>
-            <p>Dizajn modern dhe i pastër, i përshtatur për markën tuaj.</p>
-        </div>
-
-        <div class="box">
-            <img src="images/icon-2.svg" alt="">
-            <h3>zhvillim web</h3>
-            <p>Faqe të shpejta dhe responsive me teknologjitë më të fundit.</p>
-        </div>
-
-        <div class="box">
-            <img src="images/icon-3.svg" alt="">
-            <h3>optimizim SEO</h3>
-            <p>Faqja juaj e gjetshme lehtësisht në motorët e kërkimit.</p>
-        </div>
-
-        <div class="box">
-            <img src="images/icon-4.svg" alt="">
-            <h3>branding</h3>
-            <p>Identitet vizual që e bën biznesin tuaj të paharrueshëm.</p>
-        </div>
-
-        <div class="box">
-            <img src="images/icon-5.svg" alt="">
-            <h3>dizajn UI/UX</h3>
-            <p>Përvojë përdoruesi e thjeshtë dhe intuitive për vizitorët.</p>
-        </div>
-
-        <div class="box">
-            <img src="images/icon-6.svg" alt="">
-            <h3>mirëmbajtje</h3>
-            <p>Përditësime dhe mbështetje e vazhdueshme për faqen tuaj.</p>
-        </div>
-
-    </div>
-
-</section>
-
-<!-- services section ends -->
-
-<!-- about section starts  -->
-
-<section class="about" id="about">
-
-    <div class="image">
-        <img src="images/about-img.svg" alt="">
-    </div>
-
-    <div class="content">
-        <h3>pse duhet <span class="line-down">të na zgjidhni ne?</span></h3>
-        <p>Ne besojmë se çdo biznes meriton një prezencë profesionale në internet. Prandaj çdo projekt e trajtojmë me kujdes — nga dizajni i parë deri te detaji i fundit.</p>
-        <p>Punojmë ngushtë me klientin në çdo hap, me komunikim të qartë dhe afate të respektuara.</p>
-        <a href="#features" class="btn">lexo më shumë</a>
-    </div>
-
-</section>
-
-<!-- about section ends -->
-
-<!-- steps section starts  -->
-
-<section class="steps">
-
-    <div class="heading">
-        <span>si të filloni</span>
-        <h1>me 3 hapa të thjeshtë</h1>
-    </div>
-
-    <div class="box-container">
-
-        <div class="box">
-            <img src="images/step-1.svg" alt="">
-            <h3>na kontaktoni</h3>
-            <p>Na tregoni idenë tuaj — ne dëgjojmë me vëmendje.</p>
-            <a href="#faq" class="btn">lexo më shumë</a>
-        </div>
-
-        <div class="box">
-            <img src="images/step-2.svg" alt="">
-            <h3>personalizoni dizajnin</h3>
-            <p>Zgjidhni stilin dhe përmbajtjen që i përshtatet biznesit tuaj.</p>
-            <a href="#faq" class="btn">lexo më shumë</a>
-        </div>
-
-        <div class="box">
-            <img src="images/step-3.svg" alt="">
-            <h3>publikojeni faqen</h3>
-            <p>Ne e ndërtojmë dhe e publikojmë faqen tuaj gati për vizitorë.</p>
-            <a href="#faq" class="btn">lexo më shumë</a>
-        </div>
-
-    </div>
-    
-</section>
-
-<!-- steps section ends -->
-
-<!-- features section starts  -->
-
-<section class="features" id="features">
-
-    <div class="heading">
-        <span>veçoritë tona</span>
-        <h1>çfarë na bën të ndryshëm?</h1>
-    </div>
-
-    <div class="box-container">
-
-        <div class="box">
-            <div class="image">
-                <img src="images/feature-1.svg" alt="">
-            </div>
-            <div class="content">
-                <h3>fillim <span class="line-down">i lehtë!</span></h3>
-                <p>Procesi ynë është i thjeshtë: një bisedë mjafton për të nisur projektin tuaj, pa komplikime teknike nga ana juaj.</p>
-                <a href="#pricing" class="btn">lexo më shumë</a>
-            </div>
-        </div>
-
-        <div class="box">
-            <div class="image">
-                <img src="images/feature-2.svg" alt="">
-            </div>
-            <div class="content">
-                <h3>dizajne <span class="line-down">kreative</span> dhe unike</h3>
-                <p>Çdo faqe dizajnohet posaçërisht për ju — asnjë template i kopjuar, vetëm zgjidhje origjinale.</p>
-                <a href="#pricing" class="btn">lexo më shumë</a>
-            </div>
-        </div>
-
-        <div class="box">
-            <div class="image">
-                <img src="images/feature-3.svg" alt="">
-            </div>
-            <div class="content">
-                <h3>punë <span class="line-down">profesionale</span></h3>
-                <p>Kujdes maksimal për detajet, kod i pastër dhe standarde moderne në çdo projekt.</p>
-                <a href="#pricing" class="btn">lexo më shumë</a>
-            </div>
-        </div>
-
-        <div class="box">
-            <div class="image">
-                <img src="images/feature-4.svg" alt="">
-            </div>
-            <div class="content">
-                <h3>plotësisht <span class="line-down">responsive</span></h3>
-                <p>Faqja juaj duket dhe funksionon shkëlqyeshëm në telefon, tablet dhe kompjuter.</p>
-                <a href="#pricing" class="btn">lexo më shumë</a>
-            </div>
-        </div>
-
-    </div>
-
-</section>
-
-<!-- features section ends -->
-
-<!-- pricing section starts  -->
-
-<section class="pricing" id="pricing">
-
-    <div class="heading">
-        <span>zgjidhni planin</span>
-        <h1>plane për çdo nevojë</h1>
-    </div>
-
-    <div class="price-toggler">
-        <span class="month active">mujore</span>
-        <span class="year">vjetore</span>
-    </div>
-
-    <div class="box-container">
-
-        <div class="box">
-            <h3>bazë</h3>
-            <div class="price">
-                <div class="month">falas</div>
-                <div class="year"><span>$</span>29.<span>99</span></div>
-            </div>
-            <div class="list">
-                <p> <i class="fas fa-check"></i> faqe prezantuese </p>
-                <p> <i class="fas fa-check"></i> dizajn responsive </p>
-                <p> <i class="fas fa-check"></i> 2 seksione </p>
-                <p> <i class="fas fa-check"></i> mirëmbajtje bazë </p>
-                <p> <i class="fas fa-check"></i> mbështetje me email </p>
-            </div>
-            <a href="#faq" class="btn">zgjidh planin</a>
-        </div>
-
-        <div class="box">
-            <h3>standard</h3>
-            <div class="price">
-                <div class="month"><span>$</span>29.<span>99</span></div>
-                <div class="year"><span>$</span>59.<span>99</span></div>
-            </div>
-            <div class="list">
-                <p> <i class="fas fa-check"></i> faqe biznesi </p>
-                <p> <i class="fas fa-check"></i> dizajn i personalizuar </p>
-                <p> <i class="fas fa-check"></i> deri në 10 faqe </p>
-                <p> <i class="fas fa-check"></i> optimizim SEO bazë </p>
-                <p> <i class="fas fa-check"></i> mbështetje prioritare </p>
-            </div>
-            <a href="#faq" class="btn">zgjidh planin</a>
-        </div>
-
-        <div class="box">
-            <h3>premium</h3>
-            <div class="price">
-                <div class="month"><span>$</span>59.<span>99</span></div>
-                <div class="year"><span>$</span>89.<span>99</span></div>
-            </div>
-            <div class="list">
-                <p> <i class="fas fa-check"></i> faqe e avancuar </p>
-                <p> <i class="fas fa-check"></i> dizajn unik premium </p>
-                <p> <i class="fas fa-check"></i> faqe të pakufizuara </p>
-                <p> <i class="fas fa-check"></i> SEO i plotë </p>
-                <p> <i class="fas fa-check"></i> mbështetje 24/7 </p>
-            </div>
-            <a href="#faq" class="btn">zgjidh planin</a>
-        </div>
-
-    </div>
-    
-</section>
-
-<!-- pricing section ends -->
-
-<!-- faq section starts  -->
-
-<section class="faq" id="faq">
-
-    <div class="heading">
-        <span>pyetjet e shpeshta</span>
-        <h1>pyetje & përgjigje</h1>
-    </div>
-
-    <div class="accordion-container">
-
-        <div class="accordion">
-            <div class="accordion-heading">
-                <h3>si mund të kontaktoj me ju?</h3>
-                <i class="fas fa-angle-down"></i>
-            </div>
-            <p class="accordion-content">
-                Mund të na kontaktoni në telefon +355 6XX XXX XXX ose me email në shembull@example.com. Përgjigjemi sa më shpejt të jetë e mundur.
-            </p>
-        </div>
-
-        <div class="accordion">
-            <div class="accordion-heading">
-                <h3>sa kohë zgjat ndërtimi i një faqeje?</h3>
-                <i class="fas fa-angle-down"></i>
-            </div>
-            <p class="accordion-content">
-                Koha varet nga kompleksiteti i projektit. Një faqe prezantuese e thjeshtë mund të jetë gati brenda pak ditësh, ndërsa projektet më të mëdha kërkojnë më shumë kohë. Afatin e saktë e caktojmë bashkë në fillim.
-            </p>
-        </div>
-
-        <div class="accordion">
-            <div class="accordion-heading">
-                <h3>a do të funksionojë faqja në telefon?</h3>
-                <i class="fas fa-angle-down"></i>
-            </div>
-            <p class="accordion-content">
-                Po. Çdo faqe që ndërtojmë është plotësisht responsive — duket dhe funksionon njësoj mirë në telefon, tablet dhe kompjuter.
-            </p>
-        </div>  
-
-        <div class="accordion">
-            <div class="accordion-heading">
-                <h3>a kam nevojë për njohuri teknike?</h3>
-                <i class="fas fa-angle-down"></i>
-            </div>
-            <p class="accordion-content">
-                Jo. Ne kujdesemi për gjithçka teknike. Ju vetëm na tregoni çfarë dëshironi dhe ne e kthejmë në realitet.
-            </p>
-        </div>  
-
-        <div class="accordion">
-            <div class="accordion-heading">
-                <h3>a ofroni mirëmbajtje pas publikimit?</h3>
-                <i class="fas fa-angle-down"></i>
-            </div>
-            <p class="accordion-content">
-                Po, ofrojmë mirëmbajtje dhe mbështetje të vazhdueshme që faqja juaj të qëndrojë e sigurt dhe e përditësuar.
-            </p>
-        </div>  
-
-        <div class="accordion">
-            <div class="accordion-heading">
-                <h3>si mund ta menaxhoj faqen time?</h3>
-                <i class="fas fa-angle-down"></i>
-            </div>
-            <p class="accordion-content">
-                Pas dorëzimit ju shpjegojmë gjithçka hap pas hapi, në mënyrë që ta menaxhoni faqen lehtësisht edhe pa përvojë teknike.
-            </p>
-        </div>  
-
-    </div>
-
-</section>
-
-<!-- faq section ends -->
-
-<section class="newsletter">
-    <div class="content">
-        <h3><span class="line-down">regjistrohu</span> dhe fillo tani</h3>
-        <p>Lini email-in tuaj dhe ne do t'ju kontaktojmë për të diskutuar projektin tuaj — pa detyrime.</p>
-        <form action="">
-            <input type="email" name="" placeholder="shkruani email-in tuaj" id="" class="email">
-            <input type="submit" value="regjistrohu" class="btn">
-        </form>
-        <p>keni tashmë një llogari? <a href="#">hyni</a></p>
-    </div>
-</section>
-
-<!-- footer section starts  -->
-
-<section class="footer">
-
-    <div class="box-container">
-
-        <div class="box">
-            <h3>linqe të shpejta</h3>
-            <a href="#home">ballina</a>
-            <a href="#services">shërbimet</a>
-            <a href="#about">rreth nesh</a>
-            <a href="#features">veçoritë</a>
-            <a href="#pricing">çmimet</a>
-            <a href="#faq">pyetjet</a>
-        </div>
-
-        <div class="box">
-            <h3>linqe shtesë</h3>
-            <a href="#">llogaria ime</a>
-            <a href="#">kushtet e përdorimit</a>
-            <a href="#">politika e privatësisë</a>
-        </div>
-
-        <div class="box">
-            <h3>na kontaktoni</h3>
-            <a href="#">+355 6XX XXX XXX</a>
-            <a href="mailto:shembull@example.com">shembull@example.com</a>
-            <a href="#">Tiranë, Shqipëri</a>
-        </div>
-
-        <div class="box">
-            <h3>na ndiqni</h3>
-            <a href="#">facebook</a>
-            <a href="#">instagram</a>
-            <a href="#">linkedin</a>
-        </div>
-
-    </div>
-
-    <div class="credit">krijuar nga <span> Erion Nezha </span> | të gjitha të drejtat e rezervuara!</div>
-
-</section>
-
-<!-- footer section ends -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- custom js file link  -->
-<script src="js/script.js"></script>
-
-    
+<div class="tabs">
+<button class="active" onclick="show('demo',this)">🖥️ Live Demo</button>
+<button onclick="show('code',this)">📝 Kodi Burim</button>
+</div>
+<main>
+<div class="note">💡 Demo-ja live ekzekutohet direkt në browser. Kliko <strong>Kodi Burim</strong> për të parë kodin e plotë të projektit.</div>
+<div id="p-demo" class="panel active"><iframe class="demo" src="demo/index.html" title="Live demo"></iframe></div>
+<div id="p-code" class="panel"><div class="codewrap">
+<aside class="tree" id="tree"></aside>
+<div class="codeview"><div class="cbar" id="cbar"></div><div id="codebox"><pre></pre></div></div>
+</div></div>
+</main>
+<footer>Krijuar nga <strong>Erion Nezha</strong> — © 2026</footer>
+<script>
+const TREE={"dirs": [{"name": "css", "dirs": [], "files": ["style.css", "style.scss"]}, {"name": "images", "dirs": [], "files": ["about-img.svg", "feature-1.svg", "feature-2.svg", "feature-3.svg", "feature-4.svg", "home-img.svg", "icon-1.svg", "icon-2.svg", "icon-3.svg", "icon-4.svg", "icon-5.svg", "icon-6.svg", "pic-1.png", "pic-2.png", "pic-3.png", "pic-4.png", "step-1.svg", "step-2.svg", "step-3.svg"]}, {"name": "js", "dirs": [], "files": ["script.js"]}], "files": ["index.html", "screenshot.png"]};
+const CODEDIR="demo";
+const IMG=/\.(png|jpe?g|gif|svg|webp|ico|bmp)$/i;
+function show(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.getElementById('p-'+id).classList.add('active');document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+function buildTree(){
+  const t=document.getElementById('tree');let html='';
+  const walk=(node,prefix)=>{node.dirs.forEach(d=>{html+='<div class="tdir">📁 '+prefix+d.name+'</div>';walk(d,prefix+d.name+'/');});node.files.forEach(f=>{html+='<div class="tfile" data-p="'+prefix+f+'">📄 '+f+'</div>';});};
+  walk(TREE,'');t.innerHTML=html;
+  t.querySelectorAll('.tfile').forEach(el=>el.onclick=()=>openFile(el.dataset.p,el));
+  const first=t.querySelector('.tfile');if(first)openFile(first.dataset.p,first);
+}
+async function openFile(path,el){
+  document.querySelectorAll('.tfile').forEach(e=>e.classList.remove('active'));el.classList.add('active');
+  document.getElementById('cbar').textContent=path;
+  const box=document.getElementById('codebox');
+  if(IMG.test(path)){box.innerHTML='<img class="preview" src="'+CODEDIR+'/'+path+'">';return;}
+  try{const r=await fetch(CODEDIR+'/'+path);const txt=await r.text();
+    box.innerHTML='<pre>'+hl(txt,path.split('.').pop())+'</pre>';
+  }catch(e){box.innerHTML='<pre>Deshtoi leximi i file-it.</pre>';}
+}
+
+function hl(code,lang){
+  const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const tok=/(\/\/[^\n]*|\/\*[\s\S]*?\*\/|#[^\n]*|<!--[\s\S]*?-->)|("[^"\n]*"|'[^'\n]*')|\b(import|from|as|def|return|if|elif|else|for|while|in|not|and|or|class|try|except|finally|with|lambda|pass|break|continue|print|public|private|protected|static|void|int|float|double|char|long|short|boolean|new|this|null|true|false|extends|implements|package|throws|struct|include|switch|case|default|do|sizeof|typedef|const|unsigned|using|namespace|cin|cout|endl|int main|string|System|out|println|var|let|function|=>)\b|\b(\d+(\.\d+)?)\b/g;
+  let out='',last=0,m;
+  while((m=tok.exec(code))!==null){
+    out+=esc(code.slice(last,m.index));
+    const cls=m[1]?'cm':m[2]?'st':m[3]?'kw':'nm';
+    out+='<span class="'+cls+'">'+esc(m[0])+'</span>';
+    last=m.index+m[0].length;
+  }
+  out+=esc(code.slice(last));
+  return out.split('\n').map((l,i)=>'<span class="lineno">'+(i+1)+'</span>'+(l||' ')).join('\n');
+}
+
+buildTree();
+</script>
 </body>
 </html>
