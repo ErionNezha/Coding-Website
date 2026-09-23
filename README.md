@@ -41,8 +41,8 @@ Coding-Website/
 
 ## Kontakti
 
-- Telefon: +355 699 552 080
-- Email: erjonnezhaa@gmail.com
+- Telefon: +355 6XX XXX XXX
+- Email: shembull@example.com
 - Vendndodhja: Tiranë, Shqipëri
 
 ## Shënim
@@ -82,8 +82,8 @@ cd Coding-Website
 
 ## Contact
 
-- Phone: +355 699 552 080
-- Email: erjonnezhaa@gmail.com
+- Phone: +355 6XX XXX XXX
+- Email: shembull@example.com
 - Location: Tirana, Albania
 
 ## Note
