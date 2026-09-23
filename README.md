@@ -51,7 +51,7 @@ Formulari i newsletter-it në faqe është vetëm vizual — nuk ka backend PHP,
 
 ## Licenca
 
-MIT — shihni [LICENSE](LICENSE). Copyright (c) 2026 Erion Nezha.
+Të gjitha të drejtat e rezervuara © 2026 Erion Nezha — shihni [LICENSE](LICENSE).
 
 ---
 
@@ -92,4 +92,4 @@ The newsletter form on the page is decorative only — there is no PHP backend, 
 
 ## License
 
-MIT — see [LICENSE](LICENSE). Copyright (c) 2026 Erion Nezha.
+All rights reserved © 2026 Erion Nezha — see [LICENSE](LICENSE).
